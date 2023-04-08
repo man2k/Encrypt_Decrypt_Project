@@ -28,8 +28,8 @@ let originalFileName;
 app.post("/upload", upload.single("file"), (req, res) => {
   const file = req.file;
   originalFilePath = req.file.path;
-  // console.log(originalFilePath);
   originalFileName = req.file.originalname;
+  // console.log(originalFileName);
   if (!file) {
     return res.status(400).send("No file Uploaded");
   }
@@ -46,14 +46,18 @@ app.get("/encrypt", (req, res) => {
       console.log("File Encrypted Successfully");
     }
   });
-  res.status(200).json({ key: key.toString("hex"), iv: iv.toString("hex") });
+  res.status(200).redirect("http://localhost:5173");
+  // .json({ key: key.toString("hex"), iv: iv.toString("hex") });
+  console.log(
+    JSON.stringify({ key: key.toString("hex"), iv: iv.toString("hex") })
+  );
 });
 
 app.get("/decrypt", (req, res) => {
-  console.log(key.toString("hex"));
+  // console.log(key.toString("hex"));
   decryptFile(
     "./uploads/enc/encrypted",
-    "./uploads/dec/decrypted.jpg",
+    `./uploads/dec/${originalFileName}`,
     key,
     iv,
     (err) => {
@@ -61,13 +65,17 @@ app.get("/decrypt", (req, res) => {
         console.error(err);
       } else {
         console.log("File Decrypted Successfully");
-        res.download("./uploads/dec/decrypted.jpg", "decrypted.jpg", (err) => {
-          if (err) {
-            console.error("Error sending file:", err);
-          } else {
-            console.log("File sent successfully!");
+        res.download(
+          `./uploads/dec/${originalFileName}`,
+          originalFileName,
+          (err) => {
+            if (err) {
+              console.error("Error sending file:", err);
+            } else {
+              console.log("File sent successfully!");
+            }
           }
-        });
+        );
       }
     }
   );
