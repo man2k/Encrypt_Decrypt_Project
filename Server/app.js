@@ -66,7 +66,7 @@ app.get("/decrypt", (req, res) => {
       } else {
         console.log("File Decrypted Successfully");
         res.download(
-          `./uploads/original/${originalFileName}`,
+          `./uploads/dec/${originalFileName}`,
           originalFileName,
           (err) => {
             if (err) {
