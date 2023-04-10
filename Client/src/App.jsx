@@ -1,44 +1,79 @@
-import { useState } from 'react'
-import './App.css'
-import Select from 'react-select'
-import ChipherList from './Components/ChipherList'
-import axios from "axios"
+import "./App.css";
+
+import { useState } from "react";
+import Select from "react-select";
+
+import ChipherList from "./assets/Data/ChipherList";
+import FormBox from "./Components/FormBox";
+import ButtonEnc from "./Components/ButtonEnc";
+
+import axios from "axios";
+import ButtonDec from "./Components/ButtonDec";
 // console.log(obj)
 // let key;
+const baseUrl = "http://localhost:3000";
+
 function App() {
-  const [UserChoice, setChoice] = useState('');
-  const [key, setKey] = useState('');
-  // let key;
+  //States
+  const [file, setFile] = useState();
+  const [UserChoice, setChoice] = useState("");
+  const [key, setKey] = useState("");
+  const [uploaded, setUploaded] = useState(false);
+
+  //Functions
+  function handleFile(e) {
+    setFile(e.target.files[0]);
+    console.log(file);
+  }
+
+  function handleForm(e) {
+    e.preventDefault();
+    const formData = new FormData();
+    formData.append("file", file);
+    formData.append("fileName", file.name);
+    const config = {
+      headers: {
+        "Content-Type": "multipart/form-data; boundary=MyBoundary",
+      },
+    };
+    axios.post(`${baseUrl}/upload`, formData, config).then((res) => {
+      setUploaded(true);
+      console.log(file);
+    });
+  }
+
+  function handleEncrypt(setKey, UserChoice) {
+    const url = `${baseUrl}/encrypt/${UserChoice}`;
+    console.log(url);
+    axios.get(url).then((res) => {
+      setKey(res.data.key);
+    });
+  }
+
+  // APP
   return (
     <div class="App">
-      <form id="UploadForm" action="http://localhost:3000/upload" method="POST" enctype="multipart/form-data">
-        <input type="file" name="file" />
-        <button class="file-upload-button" type="submit">Upload</button>
-      </form>
-      <Select options={ChipherList} className="react-select-container" classNamePrefix="react-select" onChange={(choice)=>setChoice(choice.value)}/>
-      {/* {UserChoice= 'http://localhost:3000/encrypt${}'} */}
-      {/* <form class="form-container" action="http://localhost:3000/encrypt" method="GET"> */}
-      {/* </form> */}
-      {/* <textarea>{key}</textarea> */}
-      <button class="button" type="encrypt" onClick={()=>{
-        handleEncrypt(setKey, UserChoice)
-      }}>Encrypt</button>
+      <FormBox handleForm={handleForm} handleFile={handleFile} />
+      <Select
+        options={ChipherList}
+        className="react-select-container"
+        classNamePrefix="react-select"
+        onChange={(choice) => {
+          setChoice(choice.value);
+          console.log(UserChoice);
+        }}
+      />
+      <ButtonEnc
+        handleEncrypt={handleEncrypt}
+        setKey={setKey}
+        UserChoice={UserChoice}
+      />
+      {key}
+      <br />
       {/* <form class="form-container" action="http://localhost:3000/decrypt" method="GET"> */}
-        <button class="button" type="decrypt">Decrypt</button>
+      <ButtonDec />
       {/* </form> */}
     </div>
-  )
+  );
 }
-
-function handleEncrypt(setKey, UserChoice){
-  axios.get(`http://localhost:3000/encrypt&algo=${UserChoice}`).then((res)=>{
-    setKey(res.data.key);
-    // key=res.data.key.toString('hex');
-    // console.log(res)
-    // console.log(key)
-    // return key;
-}
-)
-}
-
-export default App
+export default App;

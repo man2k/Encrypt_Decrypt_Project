@@ -2,13 +2,10 @@ const express = require("express");
 const app = express();
 const cors = require("cors");
 app.use(cors());
-// const fs = require("fs");
 const multer = require("multer");
 const encryptFile = require("./controllers/encrypt");
 const decryptFile = require("./controllers/decrypt");
-const crypto = require("crypto");
-
-// app.use(express.static("./public"));
+// const crypto = require("crypto");
 
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
@@ -20,8 +17,8 @@ const storage = multer.diskStorage({
   },
 });
 
-const key = crypto.randomBytes(32);
-const iv = crypto.randomBytes(16);
+// const key = crypto.randomBytes(16);
+// const iv = crypto.randomBytes(16);
 
 const upload = multer({ storage: storage });
 let originalFilePath;
@@ -31,28 +28,25 @@ app.post("/upload", upload.single("file"), (req, res) => {
   const file = req.file;
   originalFilePath = req.file.path;
   originalFileName = req.file.originalname;
-  // console.log(originalFilePath);
   if (!file) {
     return res.status(400).send("No file Uploaded");
   }
   console.log("File Uploaded Successfully");
-  res.status(200).redirect("http://localhost:5173");
+  res.status(200).json({ success: true });
   res.end();
 });
 
-app.get("/encrypt", (_, res) => {
-  encryptFile(originalFilePath, "./uploads/enc/encrypted", key, iv, (err) => {
+app.get("/encrypt/:algo", (req, res) => {
+  let key = "";
+  const { algo } = req.params;
+  console.log("algo", algo);
+  encryptFile(originalFilePath, "./uploads/enc/encrypted", algo, (err, key) => {
     if (err) {
-      console.error(err);
+      console.error("err", err);
       res.status(400).redirect("http://localhost:5173");
-    } else {
+    } else if (key) {
       console.log("File Encrypted Successfully");
       res.status(200).json({ key: key.toString("hex") });
-      // .download("./uploads/enc/encrypted", "encrypted", (err) => {
-      //   if (err) {
-      //     console.error("Error sending file:", err);
-      //   }
-      // })
     }
   });
 
