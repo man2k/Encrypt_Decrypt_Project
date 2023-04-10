@@ -8,9 +8,9 @@ import FormBox from "./Components/FormBox";
 import ButtonEnc from "./Components/ButtonEnc";
 
 import axios from "axios";
+import FileDownload from "js-file-download";
 import ButtonDec from "./Components/ButtonDec";
-// console.log(obj)
-// let key;
+import InputKeyBox from "./Components/InputKeyBox";
 const baseUrl = "http://localhost:3000";
 
 function App() {
@@ -18,6 +18,7 @@ function App() {
   const [file, setFile] = useState();
   const [UserChoice, setChoice] = useState("");
   const [key, setKey] = useState("");
+  const [keyDec, setKeyDec] = useState("");
   const [uploaded, setUploaded] = useState(false);
 
   //Functions
@@ -38,15 +39,30 @@ function App() {
     };
     axios.post(`${baseUrl}/upload`, formData, config).then((res) => {
       setUploaded(true);
-      console.log(file);
     });
   }
 
   function handleEncrypt(setKey, UserChoice) {
     const url = `${baseUrl}/encrypt/${UserChoice}`;
-    console.log(url);
     axios.get(url).then((res) => {
       setKey(res.data.key);
+    });
+  }
+
+  function handleDecrypt() {
+    const url = `${baseUrl}/decrypt/${UserChoice}`;
+    const config = {
+      headers: {
+        "Content-Type": "application/json",
+      },
+    };
+    const json = JSON.stringify({ key: keyDec });
+
+    axios.post(url, json, config).then((res) => {
+      const fileName = res.request
+        .getResponseHeader("Content-Disposition")
+        .match(/filename="(.*)"/)[1];
+      FileDownload(res.data, fileName);
     });
   }
 
@@ -68,12 +84,12 @@ function App() {
         setKey={setKey}
         UserChoice={UserChoice}
       />
-      <br />
+      <div />
       {key}
-      <br />
-      {/* <form class="form-container" action="http://localhost:3000/decrypt" method="GET"> */}
-      <ButtonDec />
-      {/* </form> */}
+      <div />
+      <InputKeyBox setKeyDec={setKeyDec} />
+
+      <ButtonDec handleDecrypt={handleDecrypt} keyDec={keyDec} />
     </div>
   );
 }

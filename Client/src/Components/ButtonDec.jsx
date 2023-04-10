@@ -1,9 +1,15 @@
 import React from "react";
 
-const ButtonDec = () => {
+const ButtonDec = (props) => {
   return (
     <>
-      <button className="button" type="decrypt">
+      <button
+        className="button"
+        type="decrypt"
+        onClick={() => {
+          props.handleDecrypt();
+        }}
+      >
         Decrypt
       </button>
     </>
