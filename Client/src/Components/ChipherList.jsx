@@ -1,4 +1,4 @@
-const obj = [
+const ChipherList = [
     {
         "label": "CAST-cbc",
         "value": "CAST-cbc"
@@ -433,5 +433,5 @@ const obj = [
     }
 ]
 
-export default obj
+export default ChipherList;
 

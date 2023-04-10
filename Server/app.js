@@ -1,5 +1,7 @@
 const express = require("express");
 const app = express();
+const cors = require("cors");
+app.use(cors());
 // const fs = require("fs");
 const multer = require("multer");
 const encryptFile = require("./controllers/encrypt");
@@ -45,13 +47,12 @@ app.get("/encrypt", (_, res) => {
       res.status(400).redirect("http://localhost:5173");
     } else {
       console.log("File Encrypted Successfully");
-      res
-        .status(200)
-        .download("./uploads/enc/encrypted", "encrypted", (err) => {
-          if (err) {
-            console.error("Error sending file:", err);
-          }
-        });
+      res.status(200).json({ key: key.toString("hex") });
+      // .download("./uploads/enc/encrypted", "encrypted", (err) => {
+      //   if (err) {
+      //     console.error("Error sending file:", err);
+      //   }
+      // })
     }
   });
 
