@@ -156,3 +156,26 @@ input[type=file]::file-selector-button:hover {
   color: rgb(255, 255, 255);
   text-decoration: none;
 }
+
+.react-select-container {
+
+  .react-select__menu-list {
+    background-color: #242424 ;
+  }
+
+  .react-select__option:hover {
+    background-color: #413d3d;
+    font-weight: bold;
+    font-family: 'Courier New', Courier, monospace;
+  }
+  .react-select__value-container{
+    background-color: black;
+    font-weight: bold;
+    font-family: 'Courier New', Courier, monospace;
+
+  }
+  .react-select__control{
+    background-color: black;
+    
+  }
+}
