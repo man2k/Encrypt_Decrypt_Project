@@ -4,7 +4,7 @@ const ButtonEnc = (props) => {
   return (
     <>
       <button
-        class="button"
+        className="button"
         type="encrypt"
         onClick={() => {
           props.handleEncrypt(props.setKey, props.UserChoice);

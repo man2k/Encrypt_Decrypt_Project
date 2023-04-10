@@ -52,7 +52,7 @@ function App() {
 
   // APP
   return (
-    <div class="App">
+    <div className="App">
       <FormBox handleForm={handleForm} handleFile={handleFile} />
       <Select
         options={ChipherList}
@@ -68,6 +68,7 @@ function App() {
         setKey={setKey}
         UserChoice={UserChoice}
       />
+      <br />
       {key}
       <br />
       {/* <form class="form-container" action="http://localhost:3000/decrypt" method="GET"> */}

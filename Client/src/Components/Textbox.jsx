@@ -1,11 +1,9 @@
-import React from 'react'
+import React from "react";
 
-const Textbox = props => {
-  return (
-    <div>Textbox</div>
-  )
-}
+const Textbox = (props) => {
+  return <div>Textbox</div>;
+};
 
-Textbox.propTypes = {}
+Textbox.propTypes = {};
 
-export default Textbox
+export default Textbox;

@@ -3,7 +3,7 @@ import React from "react";
 const ButtonDec = () => {
   return (
     <>
-      <button class="button" type="decrypt">
+      <button className="button" type="decrypt">
         Decrypt
       </button>
     </>
