@@ -37,8 +37,8 @@ h1 {
 }
 /* Set the background color and font family for the entire page */
 body {
-  background-color: #000000;
-  background-image: url('https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fwww.bytebacklaw.com%2Fwp-content%2Fuploads%2Fsites%2F242%2F2015%2F06%2Fkey-digitaliStock_000022243984_Large.jpg&f=1&nofb=1&ipt=f8e50dc31f8642f8b3c58a763b0748751a2e11cba64b1eea257c4f6db9ee975c&ipo=images');
+  background-color: #242323;
+  /* background-image: url('https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fwww.bytebacklaw.com%2Fwp-content%2Fuploads%2Fsites%2F242%2F2015%2F06%2Fkey-digitaliStock_000022243984_Large.jpg&f=1&nofb=1&ipt=f8e50dc31f8642f8b3c58a763b0748751a2e11cba64b1eea257c4f6db9ee975c&ipo=images'); */
   font-family: sans-serif;
   color: white;
   text-shadow: #000000;
@@ -140,4 +140,19 @@ input[type=file]::file-selector-button:hover {
 .file-upload-button:hover {
   background-color: #666;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.4);
+}
+
+#navbar {
+  background-color: rgb(58, 55, 55);
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  box-shadow: 0 0 25px 0 black;
+  display: inline;
+  color: rgb(255, 255, 255);
+  text-decoration: none;
 }
