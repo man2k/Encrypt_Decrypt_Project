@@ -1,7 +1,11 @@
 import React from "react";
 
 const Textbox = (props) => {
-  return <div>Textbox</div>;
+  return (
+    <div>
+      <input type="text" value={props.key} />
+    </div>
+  );
 };
 
 Textbox.propTypes = {};

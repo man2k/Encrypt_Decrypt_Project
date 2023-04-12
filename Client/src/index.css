@@ -1,3 +1,6 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 :root {
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
@@ -64,22 +67,21 @@ body {
   border-radius: 4px;
   cursor: pointer;
   transition: all 0.3s ease;
-  
 }
-input[type=file]::file-selector-button {
+input[type="file"]::file-selector-button {
   border: 1px solid #02a0ff;
-  padding: .2em .4em;
-  border-radius: .2em;
+  padding: 0.2em 0.4em;
+  border-radius: 0.2em;
   background-color: #02a0ff;
   transition: 0.5s;
 }
 
-input[type=file]::file-selector-button:hover {
+input[type="file"]::file-selector-button:hover {
   background-color: #097112;
   border: 1px solid #20b240;
 }
 #UploadForm button {
-  background-color: #4CAF50;
+  background-color: #4caf50;
   color: #fff;
   border: none;
   padding: 10px 20px;
@@ -158,24 +160,21 @@ input[type=file]::file-selector-button:hover {
 }
 
 .react-select-container {
-
   .react-select__menu-list {
-    background-color: #242424 ;
+    background-color: #242424;
   }
 
   .react-select__option:hover {
     background-color: #413d3d;
     font-weight: bold;
-    font-family: 'Courier New', Courier, monospace;
+    font-family: "Courier New", Courier, monospace;
   }
-  .react-select__value-container{
+  .react-select__value-container {
     background-color: black;
     font-weight: bold;
-    font-family: 'Courier New', Courier, monospace;
-
+    font-family: "Courier New", Courier, monospace;
   }
-  .react-select__control{
+  .react-select__control {
     background-color: black;
-    
   }
 }

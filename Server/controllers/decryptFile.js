@@ -10,6 +10,9 @@ function decryptFile(inputFile, outputFile, key, algo, callback) {
     if (err) {
       callback(err);
     } else {
+      fs.unlink(`${inputFile}`, (err) => {
+        if (err) throw err;
+      });
       callback(null);
     }
   });

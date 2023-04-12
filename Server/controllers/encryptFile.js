@@ -12,6 +12,9 @@ function encryptFile(inputFile, outputFile, algo, callback) {
     if (err) {
       callback(err, null);
     } else {
+      fs.unlink(`${inputFile}`, (err) => {
+        if (err) throw err;
+      });
       callback(null, key);
     }
     return key;

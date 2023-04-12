@@ -6,8 +6,8 @@ const ButtonDec = (props) => {
       <button
         className="button"
         type="decrypt"
-        onClick={() => {
-          props.handleDecrypt();
+        onClick={(e) => {
+          props.handleDecrypt(e);
         }}
       >
         Decrypt
