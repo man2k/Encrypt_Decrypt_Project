@@ -11,6 +11,7 @@ import FormBox from "./Components/FormBox";
 import ButtonEnc from "./Components/ButtonEnc";
 import ButtonDec from "./Components/ButtonDec";
 import InputKeyBox from "./Components/InputKeyBox";
+import Steganography from "./Components/Steganography";
 import Card from "./Components/Card";
 
 const baseUrl = "http://localhost:3000";
@@ -111,6 +112,11 @@ function App() {
       <InputKeyBox setKeyDec={setKeyDec} />
 
       <ButtonDec handleDecrypt={handleDecrypt} keyDec={keyDec} />
+      <div>
+        <div>
+          <Steganography />
+        </div>
+      </div>
     </div>
   );
 }
