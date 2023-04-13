@@ -18,7 +18,7 @@ app.use(express.static("./public"));
 
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
-    cb(null, "uploads/store/");
+    cb(null, "tmp/store/");
   },
   filename: (req, file, cb) => {
     const filename = `${Date.now()}-${file.originalname}`;
