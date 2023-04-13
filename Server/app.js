@@ -4,6 +4,8 @@ const cors = require("cors");
 const corsOptions = {
   exposedHeaders: ["Content-Disposition", "filename"],
 };
+const port = process.env.PORT || 3000;
+
 const path = require("path");
 const fs = require("fs");
 const multer = require("multer");
@@ -90,5 +92,7 @@ app.post("/decrypt/:algo", (req, res) => {
 });
 
 // app.use("/uploads", express.static(path.join(__dirname, "uploads")));
-
-app.listen(3000, () => console.log("Server Listenin on port 3000"));
+app.listen(port, "0.0.0.0", () => {
+  console.log(`Example app listening at http://localhost:${port}`);
+});
+// app.listen(3000, () => console.log("Server Listenin on port 3000"));
