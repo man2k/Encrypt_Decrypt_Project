@@ -1,7 +1,8 @@
 import "./App.css";
 
 import { useState } from "react";
-import Select from "react-select";
+// import Select from "react-select";
+import { Select, Option } from "@material-tailwind/react";
 import axios from "axios";
 import FileDownload from "js-file-download";
 
@@ -11,7 +12,7 @@ import FormBox from "./Components/FormBox";
 import ButtonEnc from "./Components/ButtonEnc";
 import ButtonDec from "./Components/ButtonDec";
 import InputKeyBox from "./Components/InputKeyBox";
-import Steganography from "./Components/Steganography";
+import EncodeKey from "./Components/EncodeKey";
 import Card from "./Components/Card";
 
 const baseUrl = "http://localhost:3000";
@@ -89,7 +90,7 @@ function App() {
         <h1>Encryption</h1>
       </div>
       <FormBox handleForm={handleForm} handleFile={handleFile} />
-      <Select
+      {/* <Select
         options={ChipherList}
         className="react-select-container"
         classNamePrefix="react-select"
@@ -97,24 +98,49 @@ function App() {
           setChoice(choice.value);
           // console.log(UserChoice);
         }}
-      />
+      /> */}
+      {/* {console.log(
+        ChipherList.map((e) => {
+          return <Option>{e.value}</Option>;
+        })
+      )} */}
+      <Select
+        className="text-white"
+        label="Select Encryption Type"
+        onChange={(choice) => {
+          // console.log(choice, typeof choice);
+          setChoice(choice);
+          // console.log(UserChoice);
+        }}
+      >
+        {ChipherList.map((e) => {
+          return (
+            <Option
+              className="block appearance-none w-full bg-gray-200 border border-transparent hover:bg-gray-500 px-4 py-2 pr-8 rounded shadow leading-tight focus:outline-none focus:shadow-outline"
+              key={e.value}
+            >
+              {e.label}
+            </Option>
+          );
+        })}
+      </Select>
       <ButtonEnc
         handleEncrypt={handleEncrypt}
         setKey={setKey}
         setEncrypted={setEncrypted}
         UserChoice={UserChoice}
       />
-      <div>{encrypted && <Card />}</div>
+      <div>{encrypted && <Card password={key} />}</div>
 
-      <div />
+      {/* <div />
       {key}
-      <div />
+      <div /> */}
       <InputKeyBox setKeyDec={setKeyDec} />
 
       <ButtonDec handleDecrypt={handleDecrypt} keyDec={keyDec} />
       <div>
         <div>
-          <Steganography />
+          <EncodeKey />
         </div>
       </div>
     </div>
