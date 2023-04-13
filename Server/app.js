@@ -14,7 +14,21 @@ const decryptFile = require("./controllers/decryptFile");
 
 app.use(cors(corsOptions));
 app.use(express.json());
-// app.use(express.static("./public"));
+app.use(express.static("./public"));
+
+// #############################################################################
+// This configures static hosting for files in /public that have the extensions
+// listed in the array.
+// var options = {
+//   dotfiles: 'ignore',
+//   etag: false,
+//   extensions: ['htm', 'html','css','js','ico','jpg','jpeg','png','svg'],
+//   index: ['index.html'],
+//   maxAge: '1m',
+//   redirect: false
+// }
+// app.use(express.static('public', options))
+// #############################################################################
 
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
@@ -92,7 +106,7 @@ app.post("/decrypt/:algo", (req, res) => {
 });
 
 // app.use("/uploads", express.static(path.join(__dirname, "uploads")));
-app.listen(port, "0.0.0.0", () => {
+app.listen(port, () => {
   console.log(`Example app listening at http://localhost:${port}`);
 });
 // app.listen(3000, () => console.log("Server Listenin on port 3000"));
