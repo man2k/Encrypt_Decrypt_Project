@@ -117,7 +117,7 @@ function App() {
           return (
             <Option
               className="block appearance-none w-full bg-gray-200 border border-transparent hover:bg-gray-500 px-4 py-2 pr-8 rounded shadow leading-tight focus:outline-none focus:shadow-outline"
-              key={e.value}
+              value={e.value}
             >
               {e.label}
             </Option>
