@@ -3,7 +3,7 @@
 @tailwind utilities;
 :root {
   @apply leading-normal font-normal text-[rgba(255,255,255,0.87)] bg-[#242424];
-  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  font-family: "Courier New", Courier, monospace;
   color-scheme: light dark;
   font-synthesis: none;
   text-rendering: optimizeLegibility;
@@ -66,7 +66,7 @@ input[type="file"]::file-selector-button:hover {
   @apply bg-[#444] text-white cursor-pointer shadow-[0_2px_4px_rgba(0,0,0,0.4)] transition-all duration-[0.2s] ease-[ease-in-out] m-2.5 px-5 py-2.5 rounded-[5px] border-[none] hover:bg-[#040404] hover:shadow-[0_4px_6px_rgba(0,0,0,0.4)];
 }
 #navbar {
-  @apply bg-[rgb(58,55,55)] fixed h-[50px] flex items-center shadow-[0_0_25px_0_black] inline text-white no-underline top-0 inset-x-0;
+  @apply bg-[rgb(58,55,55)] fixed h-[50px] items-center shadow-[0_0_25px_0_black] inline text-white no-underline top-0 inset-x-0;
 }
 
 .react-select-container .react-select__menu-list {
