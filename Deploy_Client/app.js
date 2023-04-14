@@ -15,7 +15,10 @@ const decryptFile = require("./controllers/decryptFile");
 app.use(cors(corsOptions));
 app.use(express.json());
 app.use(express.static("./public"));
-
+const supabase = createClient(
+  process.env.REACT_APP_SUPABASE_URL,
+  process.env.REACT_APP_ANON_KEY
+);
 // #############################################################################
 // This configures static hosting for files in /public that have the extensions
 // listed in the array.

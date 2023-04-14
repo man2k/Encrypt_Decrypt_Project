@@ -1,7 +1,6 @@
 import "./App.css";
 
 import { useState } from "react";
-// import Select from "react-select";
 import { Select, Option } from "@material-tailwind/react";
 import axios from "axios";
 import FileDownload from "js-file-download";
@@ -27,33 +26,45 @@ function App() {
   const [encrypted, setEncrypted] = useState(false);
 
   //Functions
-  function handleFile(e) {
+  const handleFile = (e) => {
     setFile(e.target.files[0]);
-  }
+  };
 
-  function handleForm(e) {
+  const handleForm = async (e) => {
     e.preventDefault();
     const formData = new FormData();
-    formData.append("file", file);
-    formData.append("fileName", file.name);
-    const config = {
-      headers: {
-        "Content-Type": "multipart/form-data; boundary=MyBoundary",
-      },
-    };
-    axios.post(`${baseUrl}/upload`, formData, config).then((res) => {
-      setUploaded(true);
-    });
-  }
+    try {
+      formData.append("file", file);
+      formData.append("fileName", file.name);
+      const config = {
+        headers: {
+          "Content-Type": "multipart/form-data; boundary=MyBoundary",
+        },
+      };
+      await axios.post(`${baseUrl}/upload`, formData, config).then((res) => {
+        setUploaded(true);
+      });
+    } catch (error) {
+      // console.log(error);
+    }
+  };
 
-  function handleEncrypt() {
+  const handleEncrypt = async () => {
     const url = `${baseUrl}/encrypt/${UserChoice}`;
-    axios.get(url).then((res) => {
-      setKey(res.data.key);
-    });
-  }
+    try {
+      await axios.get(url, { responseType: "blob" }).then((res) => {
+        FileDownload(
+          res.data,
+          res.headers["content-disposition"].match(/filename="(.+)"/i)[1]
+        );
+        setKey(res.headers["x-key"]);
+      });
+    } catch (error) {
+      // console.log(error);
+    }
+  };
 
-  function handleDecrypt() {
+  const handleDecrypt = async () => {
     const url = `${baseUrl}/decrypt/${UserChoice}`;
     const config = {
       headers: {
@@ -73,15 +84,20 @@ function App() {
     })
       .then((res) => {
         fileName = res.headers.get("filename");
+        if (!fileName) {
+          return;
+        }
         return res.arrayBuffer();
       })
       .then((blob) => {
-        FileDownload(blob, fileName);
+        if (fileName) {
+          FileDownload(blob, fileName);
+        }
       })
       .catch((error) => {
         console.error(error);
       });
-  }
+  };
 
   // APP
   return (
@@ -108,9 +124,7 @@ function App() {
         className="text-white"
         label="Select Encryption Type"
         onChange={(choice) => {
-          // console.log(choice, typeof choice);
           setChoice(choice);
-          // console.log(UserChoice);
         }}
       >
         {ChipherList.map((e) => {
@@ -132,9 +146,6 @@ function App() {
       />
       <div>{encrypted && <Card password={key} />}</div>
 
-      {/* <div />
-      {key}
-      <div /> */}
       <InputKeyBox setKeyDec={setKeyDec} />
 
       <ButtonDec handleDecrypt={handleDecrypt} keyDec={keyDec} />
