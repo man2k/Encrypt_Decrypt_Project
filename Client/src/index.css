@@ -16,7 +16,7 @@ a {
   text-decoration: inherit;
 }
 body {
-  @apply flex place-items-center min-w-[320px] min-h-screen m-0 bg-[#242323] text-[white];
+  @apply bg-[#242323] text-[white];
 }
 h1 {
   @apply text-[3.2em] leading-[1.1];
@@ -31,7 +31,7 @@ input {
   @apply bg-[#1f2937] text-[#fafafa] border border-gray-700 rounded-lg py-2 px-4 placeholder-gray-500 focus:outline-none focus:shadow-sm focus:border-indigo-500;
 }
 #UploadForm {
-  @apply flex flex-col items-center justify-center bg-[#333] text-white p-5;
+  @apply flex flex-row items-center justify-center bg-[#333] text-white p-5;
   font-family: Arial, sans-serif;
 }
 #UploadForm input[type="file"] {

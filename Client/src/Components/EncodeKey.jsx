@@ -40,7 +40,7 @@ const EncodeKey = () => {
   }
 
   return (
-    <div>
+    <div className="mt-16">
       <h1>Invisible Encoding</h1>
       <div>
         <div>
@@ -70,7 +70,9 @@ const EncodeKey = () => {
           />
         </div>
         <div>
-          <button onClick={handleEncode}>Encode!</button>
+          <button className="button" onClick={handleEncode}>
+            Encode!
+          </button>
         </div>
         <div>
           <label htmlFor="EncodedText">

@@ -114,8 +114,10 @@ app.post("/decrypt/:algo", (req, res) => {
   }
 });
 
-// app.use("/uploads", express.static(path.join(__dirname, "uploads")));
+app.get("/steg", (req, res) => {});
+
 app.listen(port, () => {
   console.log(`App listening at http://localhost:${port}`);
 });
+// app.use("/uploads", express.static(path.join(__dirname, "uploads")));
 // app.listen(3000, () => console.log("Server Listenin on port 3000"));

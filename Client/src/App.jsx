@@ -101,54 +101,55 @@ function App() {
 
   // APP
   return (
-    <div className="App">
-      <div>
-        <h1>Encryption</h1>
+    <div className="App flex flex-col justify-between">
+      <div className="flex flex-nowrap flex-row justify-between mb-5">
+        <h1 className="w-2/4">Encryption</h1>
+        <h1 className="w-2/4">Decryption</h1>
       </div>
-      <FormBox handleForm={handleForm} handleFile={handleFile} />
-      {/* <Select
-        options={ChipherList}
-        className="react-select-container"
-        classNamePrefix="react-select"
-        onChange={(choice) => {
-          setChoice(choice.value);
-          // console.log(UserChoice);
-        }}
-      /> */}
-      {/* {console.log(
-        ChipherList.map((e) => {
-          return <Option>{e.value}</Option>;
-        })
-      )} */}
-      <Select
-        className="text-white"
-        label="Select Encryption Type"
-        onChange={(choice) => {
-          setChoice(choice);
-        }}
-      >
-        {ChipherList.map((e) => {
-          return (
-            <Option
-              className="block appearance-none w-full bg-gray-200 border border-transparent hover:bg-gray-500 px-4 py-2 pr-8 rounded shadow leading-tight focus:outline-none focus:shadow-outline"
-              value={e.value}
+      <div className="flex flex-nowrap flex-row justify-between ">
+        <div className="flex flex-col w-full space-y-5">
+          <FormBox handleForm={handleForm} handleFile={handleFile} />
+          <div className="ml-16 w-3/4 text-white">
+            <Select
+              className="h-11"
+              label="SelectEncryptionType"
+              onChange={(choice) => {
+                setChoice(choice);
+              }}
             >
-              {e.label}
-            </Option>
-          );
-        })}
-      </Select>
-      <ButtonEnc
-        handleEncrypt={handleEncrypt}
-        setKey={setKey}
-        setEncrypted={setEncrypted}
-        UserChoice={UserChoice}
-      />
-      <div>{encrypted && <Card password={key} />}</div>
+              {ChipherList.map((e) => {
+                return (
+                  <Option
+                    className="block appearance-none bg-gray-200 border border-transparent hover:bg-gray-500 px-4 py-2 pr-8 rounded shadow leading-tight focus:outline-none focus:shadow-outline"
+                    value={e.value}
+                  >
+                    {e.label}
+                  </Option>
+                );
+              })}
+            </Select>
+          </div>
+          <div className="mr-20">
+            <ButtonEnc
+              handleEncrypt={handleEncrypt}
+              setKey={setKey}
+              setEncrypted={setEncrypted}
+              UserChoice={UserChoice}
+            />
+          </div>
+          <div className="flex w-3/4 ml-11">
+            {encrypted && <Card password={key} />}
+          </div>
+        </div>
+        <div className="flex flex-col w-full space-y-5">
+          <FormBox handleForm={handleForm} handleFile={handleFile} />
+          <InputKeyBox setKeyDec={setKeyDec} />
+          <div className="mr-20 ml-16">
+            <ButtonDec handleDecrypt={handleDecrypt} keyDec={keyDec} />
+          </div>
+        </div>
+      </div>
 
-      <InputKeyBox setKeyDec={setKeyDec} />
-
-      <ButtonDec handleDecrypt={handleDecrypt} keyDec={keyDec} />
       <div>
         <div>
           <EncodeKey />

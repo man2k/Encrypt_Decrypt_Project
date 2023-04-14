@@ -3,7 +3,7 @@ import React from "react";
 
 const FormBox = (props) => {
   return (
-    <div>
+    <div className="flex w-full ml-16">
       <form id="UploadForm" onSubmit={props.handleForm}>
         <input type="file" name="file" onChange={props.handleFile} />
         <button className="file-upload-button" type="submit">
