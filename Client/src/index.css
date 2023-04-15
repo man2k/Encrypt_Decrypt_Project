@@ -30,6 +30,7 @@ body {
 input {
   @apply bg-[#1f2937] text-[#fafafa] border border-gray-700 rounded-lg py-2 px-4 placeholder-gray-500 focus:outline-none focus:shadow-sm focus:border-indigo-500;
 }
+/*
 #UploadForm {
   @apply flex flex-row items-center justify-center bg-[#333] text-white p-5;
   font-family: Arial, sans-serif;
@@ -45,7 +46,7 @@ input[type="file"]::file-selector-button:hover {
 }
 #UploadForm button {
   @apply bg-[#4caf50] text-white rounded cursor-pointer transition-all duration-[0.3s] ease-[ease] px-5 py-2.5 border-[none] hover:bg-[#3e8e41];
-}
+} */
 
 /* Style the form container */
 .form-container {

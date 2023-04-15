@@ -16,6 +16,7 @@ const SelectBox = (props) => {
             <Option
               className="block appearance-none bg-gray-200 border border-transparent hover:bg-gray-500 px-4 py-2 pr-8 rounded shadow leading-tight focus:outline-none focus:shadow-outline"
               value={e.value}
+              key={e.value}
             >
               {e.label}
             </Option>

@@ -89,12 +89,14 @@ const EncodeKey = () => {
               readOnly="readonly"
               onClick={(e) => {
                 // console.log(e.target.value);
-                navigator.clipboard.writeText(e.target.value);
-                let tmp = e.target.value;
-                e.target.value = "copied to clipboard";
-                setTimeout(() => {
-                  e.target.value = tmp;
-                }, 900);
+                if (e.target.value !== "") {
+                  navigator.clipboard.writeText(e.target.value);
+                  let tmp = e.target.value;
+                  e.target.value = "copied to clipboard..";
+                  setTimeout(() => {
+                    e.target.value = tmp;
+                  }, 900);
+                }
               }}
             />
             <h6 className=" font-light text-xs">click to copy</h6>

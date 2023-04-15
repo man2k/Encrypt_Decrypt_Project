@@ -60,6 +60,7 @@ function App() {
           res.headers["content-disposition"].match(/filename="(.+)"/i)[1]
         );
         setKey(res.headers["x-key"]);
+        setEncrypted(true);
       });
     } catch (error) {
       // console.log(error);
@@ -114,7 +115,7 @@ function App() {
               <ButtonEnc
                 handleEncrypt={handleEncrypt}
                 setKey={setKey}
-                setEncrypted={setEncrypted}
+                // setEncrypted={setEncrypted}
                 UserChoice={UserChoice}
               />
             </div>
