@@ -133,7 +133,7 @@ function ImgSteganography() {
         </button>
       </form>
       <div className="flex w-full justify-center mt-2">
-        {decoded.length !== 0 ? (
+        {decoded.length !== 0 && !stegUnsteg ? (
           <input
             type="text"
             id="Desteganographed_Text"
