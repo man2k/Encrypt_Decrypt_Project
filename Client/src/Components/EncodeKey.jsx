@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-// import { encode } from "../utils/steg";
 import ZwspSteg from "zwsp-steg";
 
 const EncodeKey = () => {
@@ -22,7 +21,7 @@ const EncodeKey = () => {
     copyText.select();
     copyText.setSelectionRange(0, 99999); // For mobile devices
     navigator.clipboard.writeText(copyText.value);
-    alert("Copied the text: " + copyText.value);
+    // alert("Copied the text: " + copyText.value);
     /*let decoded = ZwspSteg.decode(finalStr, ZwspSteg.MODE_FULL);
     console.log(decoded);
     let finalInput = "";
@@ -88,7 +87,6 @@ const EncodeKey = () => {
               value={encodedText}
               readOnly="readonly"
               onClick={(e) => {
-                // console.log(e.target.value);
                 if (e.target.value !== "") {
                   navigator.clipboard.writeText(e.target.value);
                   let tmp = e.target.value;

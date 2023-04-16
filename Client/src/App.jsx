@@ -1,11 +1,11 @@
 import "./App.css";
 
 import { useState } from "react";
-import { Select, Option } from "@material-tailwind/react";
+// import { Select, Option } from "@material-tailwind/react";
 import axios from "axios";
 import FileDownload from "js-file-download";
 
-import ChipherList from "./assets/Data/ChipherList";
+// import ChipherList from "./assets/Data/ChipherList";
 
 import FormBox from "./Components/FormBox";
 import ButtonEnc from "./Components/ButtonEnc";
@@ -14,6 +14,7 @@ import InputKeyBox from "./Components/InputKeyBox";
 import EncodeKey from "./Components/EncodeKey";
 import Card from "./Components/Card";
 import SelectBox from "./Components/SelectBox";
+import ImgSteganography from "./Components/ImgSteganography";
 
 const baseUrl = "http://localhost:3000";
 
@@ -139,10 +140,9 @@ function App() {
         </div>
       </div>
 
-      <div>
-        <div>
-          <EncodeKey />
-        </div>
+      <div className="flex flex-row justify-around mb-5">
+        <EncodeKey />
+        <ImgSteganography />
       </div>
     </div>
   );

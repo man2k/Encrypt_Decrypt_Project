@@ -13,6 +13,8 @@ const fs = require("fs");
 const multer = require("multer");
 const encryptFile = require("./controllers/encryptFile");
 const decryptFile = require("./controllers/decryptFile");
+const steganograph = require("./controllers/steganograph");
+const unsteganograph = require("./controllers/unsteganograph");
 
 app.use(cors(corsOptions));
 app.use(express.json());
@@ -25,14 +27,27 @@ const storage = multer.diskStorage({
     cb(null, "./uploads/store");
   },
   filename: (req, file, cb) => {
-    const filename = `${Date.now()}-${file.originalname}`;
+    const filename = `${Date.now()}-${req.url}`;
     cb(null, filename);
   },
 });
 
+const storage2 = multer.diskStorage({
+  destination: function (req, file, cb) {
+    cb(null, "uploads/store/steganograph");
+  },
+  filename: function (req, file, cb) {
+    cb(
+      null,
+      file.fieldname + "-" + Date.now() + path.extname(file.originalname)
+    );
+  },
+});
+
 const upload = multer({ storage: storage });
-let originalFilePath;
+const upload2 = multer({ storage: storage2 });
 let originalFileName;
+let originalFilePath;
 
 app.post("/upload", upload.single("file"), (req, res) => {
   const file = req.file;
@@ -43,7 +58,73 @@ app.post("/upload", upload.single("file"), (req, res) => {
   }
   console.log("File Uploaded Successfully");
   res.status(200).json({ success: true });
-  res.end();
+  // res.end();
+});
+
+app.post(
+  "/upload/steg",
+  upload2.fields([
+    {
+      name: "file",
+      maxCount: 1,
+    },
+    {
+      name: "image",
+      maxCount: 1,
+    },
+  ]),
+  (req, res) => {
+    const file = req.files["file"][0];
+    const image = req.files["image"][0];
+    // console.log("Uploaded files:", file.filename, image.filename);
+    let stegFile;
+    steganograph(
+      [
+        `./uploads/store/steganograph/${file.filename}`,
+        `./uploads/store/steganograph/${image.filename}`,
+      ],
+      [`./uploads/store/steganograph/steganographed.jpg`],
+      (err, data) => {
+        stegFile = fs.readFileSync(
+          `./uploads/store/steganograph/steganographed.jpg`
+        );
+      }
+    );
+    const options = {
+      root: path.join(__dirname, `./uploads/store/steganograph`),
+    };
+    res.sendFile("steganographed.jpg", options, (err) => {
+      if (err) {
+        console.log(err);
+      } else {
+        console.log("file sent successfully");
+        // return null;
+      }
+    });
+  }
+);
+const Jimp = require("jimp");
+
+app.get("/unsteg", (req, res) => {
+  unsteganograph(
+    "./uploads/store/steganograph/steganographed.jpg",
+    "./uploads/img1.jpg",
+    "./uploads/img2.jpg",
+    function (err, results) {
+      if (err) {
+        console.error(err);
+        return;
+      }
+
+      const original1 = results[0];
+      const original2 = results[1];
+
+      console.log("Original image 1:", original1);
+      console.log("Original image 2:", original2);
+
+      res.download("uploads/img1.jpg");
+    }
+  );
 });
 
 app.get("/encrypt/:algo", (req, res) => {
@@ -114,10 +195,6 @@ app.post("/decrypt/:algo", (req, res) => {
   }
 });
 
-app.get("/steg", (req, res) => {});
-
 app.listen(port, () => {
   console.log(`App listening at http://localhost:${port}`);
 });
-// app.use("/uploads", express.static(path.join(__dirname, "uploads")));
-// app.listen(3000, () => console.log("Server Listenin on port 3000"));
