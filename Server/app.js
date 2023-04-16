@@ -13,8 +13,7 @@ const fs = require("fs");
 const multer = require("multer");
 const encryptFile = require("./controllers/encryptFile");
 const decryptFile = require("./controllers/decryptFile");
-const steganograph = require("./controllers/steganograph");
-const unsteganograph = require("./controllers/unsteganograph");
+const { steganograph, unsteganograph } = require("./controllers/steg");
 
 app.use(cors(corsOptions));
 app.use(express.json());
@@ -39,13 +38,27 @@ const storage2 = multer.diskStorage({
   filename: function (req, file, cb) {
     cb(
       null,
-      file.fieldname + "-" + Date.now() + path.extname(file.originalname)
+      file.fieldname +
+        "-" +
+        Date.now() +
+        path.extname(file.originalname) +
+        ".png"
     );
+  },
+});
+
+const storage3 = multer.diskStorage({
+  destination: function (req, file, cb) {
+    cb(null, "uploads/store/steganograph");
+  },
+  filename: function (req, file, cb) {
+    cb(null, "steganographed.png");
   },
 });
 
 const upload = multer({ storage: storage });
 const upload2 = multer({ storage: storage2 });
+const upload3 = multer({ storage: storage3 });
 let originalFileName;
 let originalFilePath;
 
@@ -58,73 +71,45 @@ app.post("/upload", upload.single("file"), (req, res) => {
   }
   console.log("File Uploaded Successfully");
   res.status(200).json({ success: true });
-  // res.end();
 });
 
-app.post(
-  "/upload/steg",
-  upload2.fields([
-    {
-      name: "file",
-      maxCount: 1,
-    },
-    {
-      name: "image",
-      maxCount: 1,
-    },
-  ]),
-  (req, res) => {
-    const file = req.files["file"][0];
-    const image = req.files["image"][0];
-    // console.log("Uploaded files:", file.filename, image.filename);
-    let stegFile;
-    steganograph(
-      [
-        `./uploads/store/steganograph/${file.filename}`,
-        `./uploads/store/steganograph/${image.filename}`,
-      ],
-      [`./uploads/store/steganograph/steganographed.jpg`],
-      (err, data) => {
-        stegFile = fs.readFileSync(
-          `./uploads/store/steganograph/steganographed.jpg`
-        );
-      }
-    );
-    const options = {
-      root: path.join(__dirname, `./uploads/store/steganograph`),
-    };
-    res.sendFile("steganographed.jpg", options, (err) => {
-      if (err) {
-        console.log(err);
-      } else {
-        console.log("file sent successfully");
-        // return null;
-      }
-    });
-  }
-);
-const Jimp = require("jimp");
+app.post("/upload/steg", upload2.single("file"), async (req, res) => {
+  const file = req.file;
+  const secret = req.body.secret;
+  const pass = req.body.password;
 
-app.get("/unsteg", (req, res) => {
-  unsteganograph(
-    "./uploads/store/steganograph/steganographed.jpg",
-    "./uploads/img1.jpg",
-    "./uploads/img2.jpg",
-    function (err, results) {
-      if (err) {
-        console.error(err);
-        return;
-      }
-
-      const original1 = results[0];
-      const original2 = results[1];
-
-      console.log("Original image 1:", original1);
-      console.log("Original image 2:", original2);
-
-      res.download("uploads/img1.jpg");
+  steganograph(
+    `./uploads/store/steganograph/${file.filename}`,
+    `./uploads/store/steganograph/steganographed.png`,
+    secret,
+    pass,
+    (err) => {
+      res.json({ success: true });
     }
   );
+});
+
+app.post("/unsteg", upload3.single("file"), async (req, res) => {
+  await unsteganograph(
+    "./uploads/store/steganograph/steganographed.png",
+    req.body.password,
+    (err, secret) => {
+      if (err) {
+        res.status(400).json({ error: "Wrong Password" });
+      } else {
+        const Regex = /^[a-zA-Z0-9_.-]*$/gm;
+        if (Regex.exec(secret)[0]) {
+          res.json({ secret: secret });
+        } else {
+          res.status(400).json({ error: "Wrong Password" });
+        }
+      }
+    }
+  );
+});
+
+app.get("/execsteg", (req, res) => {
+  res.download("./uploads/store/steganograph/steganographed.png");
 });
 
 app.get("/encrypt/:algo", (req, res) => {

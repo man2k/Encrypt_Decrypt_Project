@@ -11,7 +11,7 @@ import FormBox from "./Components/FormBox";
 import ButtonEnc from "./Components/ButtonEnc";
 import ButtonDec from "./Components/ButtonDec";
 import InputKeyBox from "./Components/InputKeyBox";
-import EncodeKey from "./Components/EncodeKey";
+import EncodeDecodeKey from "./Components/EncodeDecodeKey";
 import Card from "./Components/Card";
 import SelectBox from "./Components/SelectBox";
 import ImgSteganography from "./Components/ImgSteganography";
@@ -48,7 +48,7 @@ function App() {
         setUploaded(true);
       });
     } catch (error) {
-      // console.log(error);
+      console.log(error);
     }
   };
 
@@ -64,19 +64,13 @@ function App() {
         setEncrypted(true);
       });
     } catch (error) {
-      // console.log(error);
+      console.log(error);
     }
   };
 
   const handleDecrypt = async () => {
     const url = `${baseUrl}/decrypt/${UserChoice}`;
-    const config = {
-      headers: {
-        "Content-Type": "application/json",
-        responseType: "arraybuffer",
-        Accept: "application/octet-stream",
-      },
-    };
+
     const json = JSON.stringify({ key: keyDec });
     let fileName;
     fetch(url, {
@@ -116,7 +110,6 @@ function App() {
               <ButtonEnc
                 handleEncrypt={handleEncrypt}
                 setKey={setKey}
-                // setEncrypted={setEncrypted}
                 UserChoice={UserChoice}
               />
             </div>
@@ -141,7 +134,7 @@ function App() {
       </div>
 
       <div className="flex flex-row justify-around mb-5">
-        <EncodeKey />
+        <EncodeDecodeKey />
         <ImgSteganography />
       </div>
     </div>
