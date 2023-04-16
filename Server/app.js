@@ -26,7 +26,8 @@ const storage = multer.diskStorage({
     cb(null, "./uploads/store");
   },
   filename: (req, file, cb) => {
-    const filename = `${Date.now()}-${req.url}`;
+    // console.log(file);
+    const filename = `forenc.${file.mimetype.split("/")[1]}`;
     cb(null, filename);
   },
 });
@@ -36,14 +37,7 @@ const storage2 = multer.diskStorage({
     cb(null, "uploads/store/steganograph");
   },
   filename: function (req, file, cb) {
-    cb(
-      null,
-      file.fieldname +
-        "-" +
-        Date.now() +
-        path.extname(file.originalname) +
-        ".png"
-    );
+    cb(null, file.originalname + ".png");
   },
 });
 
@@ -99,7 +93,7 @@ app.post("/unsteg", upload3.single("file"), async (req, res) => {
       } else {
         const Regex = /^[a-zA-Z0-9_.-]*$/gm;
         if (Regex.exec(secret)[0]) {
-          res.json({ secret: secret });
+          res.status(200).json({ secret: secret });
         } else {
           res.status(400).json({ error: "Wrong Password" });
         }
