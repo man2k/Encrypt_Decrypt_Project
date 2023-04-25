@@ -133,7 +133,7 @@ function App() {
         </div>
       </div>
 
-      <div className="flex flex-row mx-24 justify-between mb-10">
+      <div className="flex flex-row justify-between mb-10 gap-5">
         <EncodeDecodeKey />
         <ImgSteganography />
       </div>

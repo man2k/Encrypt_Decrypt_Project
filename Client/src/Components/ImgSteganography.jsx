@@ -83,7 +83,7 @@ function ImgSteganography() {
 
   return (
     <motion.div
-      className="bg-inherit p-5 shadow-sm flex flex-col mt-16 w-full h-full"
+      className="flex flex-col mt-16 bg-inherit shadow-sm p-5 w-full h-full items-center justify-around"
       animate={{ transform: "rotateY(-360deg)" }}
       transition={{ type: "spring", stiffness: 100, mass: 1, duration: 0.1 }}
       key={stegUnsteg}
@@ -103,20 +103,25 @@ function ImgSteganography() {
       ) : (
         <h1 className="text-slate-800 mb-5">Desteganography</h1>
       )}
-      <form className="flex w-full flex-col" onSubmit={handleSubmit}>
+      <form
+        className="flex w-2/3 flex-col items-center justify-between"
+        onSubmit={handleSubmit}
+      >
         {stegUnsteg && (
-          <input
-            className="block w-full text-sm text-slate-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-1 file:border-dashed hover:file:border-dotted file:text-sm file:font-semibold file:bg-green-50 file:text-violet-700 hover:file:bg-green-100"
-            type="text"
-            placeholder="Enter your secret message"
-            name="file"
-            onChange={handleInput}
-          />
+          <div>
+            <input
+              className="block w-72 text-sm text-slate-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-1 file:border-dashed hover:file:border-dotted file:text-sm file:font-semibold file:bg-green-50 file:text-violet-700 hover:file:bg-green-100"
+              type="text"
+              placeholder="Enter your secret message"
+              name="file"
+              onChange={handleInput}
+            />
+          </div>
         )}
         <br />
         <div className="mb-5">
           <input
-            className="block w-full text-sm text-slate-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-1 file:border-dashed hover:file:border-dotted file:text-sm file:font-semibold file:bg-green-50 file:text-violet-700 hover:file:bg-green-100"
+            className="block w-72 text-sm text-slate-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-1 file:border-dashed hover:file:border-dotted file:text-sm file:font-semibold file:bg-green-50 file:text-violet-700 hover:file:bg-green-100"
             type="password"
             placeholder="Enter your Password"
             name="password"
@@ -124,7 +129,7 @@ function ImgSteganography() {
           />
         </div>
         <input
-          className="block w-full text-sm text-slate-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-1 file:border-dashed hover:file:border-dotted file:text-sm file:font-semibold file:bg-green-50 file:text-violet-700 hover:file:bg-green-100"
+          className="block w-auto text-sm text-slate-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-1 file:border-dashed hover:file:border-dotted file:text-sm file:font-semibold file:bg-green-50 file:text-violet-700 hover:file:bg-green-100"
           name="image"
           type="file"
           onChange={handleFile2Change}
@@ -138,7 +143,7 @@ function ImgSteganography() {
           Submit
         </button>
       </form>
-      <div className="flex w-full justify-center mt-2">
+      <div className="flex w-72 items-center justify-center mt-2">
         {decoded.length !== 0 && !stegUnsteg ? (
           <input
             type="text"
