@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import ZwspSteg from "zwsp-steg";
-
+import { motion } from "framer-motion";
 const EncodeDecodeKey = () => {
   const [input, setInput] = useState("");
   const [decInput, setDecInput] = useState("");
@@ -43,7 +43,12 @@ const EncodeDecodeKey = () => {
   }
 
   return (
-    <div className="flex flex-col mt-16 bg-gray-900">
+    <motion.div
+      className="flex flex-col mt-16 bg-inherit shadow-sm p-5 w-full h-full"
+      animate={{ transform: "rotateY(360deg)" }}
+      transition={{ type: "spring", stiffness: 100, mass: 1, duration: 0.1 }}
+      key={encodeDecode}
+    >
       <div className="flex justify-center">
         <input
           className="appearance-none checked:bg-blue-500 form-checkbox h-5 w-5 text-gray-600 mt-3"
@@ -149,7 +154,7 @@ const EncodeDecodeKey = () => {
           </div>
         )}
       </div>
-    </div>
+    </motion.div>
   );
 };
 

@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
 import FileDownload from "js-file-download";
+import { motion } from "framer-motion";
 
 const baseUrl = "http://localhost:3000";
 
@@ -81,7 +82,12 @@ function ImgSteganography() {
   };
 
   return (
-    <div className="bg-gray-900 p-4 rounded-md flex flex-col mt-16">
+    <motion.div
+      className="bg-inherit p-5 shadow-sm flex flex-col mt-16 w-full h-full"
+      animate={{ transform: "rotateY(-360deg)" }}
+      transition={{ type: "spring", stiffness: 100, mass: 1, duration: 0.1 }}
+      key={stegUnsteg}
+    >
       <div>
         <input
           className="appearance-none checked:bg-blue-500 form-checkbox h-5 w-5 text-gray-600"
@@ -162,7 +168,7 @@ function ImgSteganography() {
           <></>
         )}
       </div>
-    </div>
+    </motion.div>
   );
 }
 
