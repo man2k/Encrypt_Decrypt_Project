@@ -23,30 +23,15 @@ h1 {
 }
 /* Set the background color and font family for the entire page */
 body {
-  /* background-image: url('https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fwww.bytebacklaw.com%2Fwp-content%2Fuploads%2Fsites%2F242%2F2015%2F06%2Fkey-digitaliStock_000022243984_Large.jpg&f=1&nofb=1&ipt=f8e50dc31f8642f8b3c58a763b0748751a2e11cba64b1eea257c4f6db9ee975c&ipo=images'); */
+  background-image: url("./assets/image.png");
+  background-size: 1530px;
+  width: auto;
   font-family: sans-serif;
   text-shadow: #000000;
 }
 input {
-  @apply bg-[#1f2937] text-[#fafafa] border border-gray-700 rounded-lg py-2 px-4 placeholder-gray-500 focus:outline-none focus:shadow-sm focus:border-indigo-500;
+  @apply bg-[#1f2937] text-[#fafafa] border border-green-800 rounded-xl py-2 px-4 placeholder-gray-500 focus:outline-none focus:shadow-xl focus:border-indigo-500;
 }
-/*
-#UploadForm {
-  @apply flex flex-row items-center justify-center bg-[#333] text-white p-5;
-  font-family: Arial, sans-serif;
-}
-#UploadForm input[type="file"] {
-  @apply flex bg-[#161916] text-white rounded cursor-pointer transition-all duration-[0.3s] ease-[ease] px-5 py-2.5 border-[none];
-}
-input[type="file"]::file-selector-button {
-  @apply border bg-[#02a0ff] transition-[0.5s] px-[0.4em] py-[0.2em] rounded-[0.2em] border-solid border-[#02a0ff];
-}
-input[type="file"]::file-selector-button:hover {
-  @apply bg-[#097112] border border-solid border-[#20b240];
-}
-#UploadForm button {
-  @apply bg-[#4caf50] text-white rounded cursor-pointer transition-all duration-[0.3s] ease-[ease] px-5 py-2.5 border-[none] hover:bg-[#3e8e41];
-} */
 
 /* Style the form container */
 .form-container {

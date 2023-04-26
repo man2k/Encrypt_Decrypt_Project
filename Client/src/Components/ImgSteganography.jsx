@@ -83,14 +83,14 @@ function ImgSteganography() {
 
   return (
     <motion.div
-      className="flex flex-col mt-16 bg-inherit shadow-sm p-5 w-full h-full items-center justify-around"
+      className="flex flex-col mt-16 bg-inherit opacity-90 shadow-sm p-5 w-full h-full items-center justify-around"
       animate={{ transform: "rotateY(-360deg)" }}
       transition={{ type: "spring", stiffness: 100, mass: 1, duration: 0.1 }}
       key={stegUnsteg}
     >
       <div>
         <input
-          className="appearance-none checked:bg-blue-500 form-checkbox h-5 w-5 text-gray-600"
+          className="appearance-none checked:bg-blue-500 form-checkbox h-5 w-5 text-gray-600 mt-5"
           type="checkbox"
           onChange={() => {
             setSteg(!stegUnsteg);
@@ -99,9 +99,9 @@ function ImgSteganography() {
         />
       </div>
       {stegUnsteg ? (
-        <h1 className="text-slate-800 mb-5">Steganography</h1>
+        <h1 className="text-white mb-5">Steganography</h1>
       ) : (
-        <h1 className="text-slate-800 mb-5">Desteganography</h1>
+        <h1 className="text-white mb-5">Desteganography</h1>
       )}
       <form
         className="flex w-2/3 flex-col items-center justify-between"
@@ -110,7 +110,7 @@ function ImgSteganography() {
         {stegUnsteg && (
           <div>
             <input
-              className="block w-72 text-sm text-slate-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-1 file:border-dashed hover:file:border-dotted file:text-sm file:font-semibold file:bg-green-50 file:text-violet-700 hover:file:bg-green-100"
+              className="block w-72 text-sm text-white file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-1 file:border-dashed hover:file:border-dotted file:text-sm file:font-semibold file:bg-green-50 file:text-violet-700 hover:file:bg-green-100"
               type="text"
               placeholder="Enter your secret message"
               name="file"
@@ -121,7 +121,7 @@ function ImgSteganography() {
         <br />
         <div className="mb-5">
           <input
-            className="block w-72 text-sm text-slate-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-1 file:border-dashed hover:file:border-dotted file:text-sm file:font-semibold file:bg-green-50 file:text-violet-700 hover:file:bg-green-100"
+            className="block w-72 text-sm text-white file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-1 file:border-dashed hover:file:border-dotted file:text-sm file:font-semibold file:bg-green-50 file:text-violet-700 hover:file:bg-green-100"
             type="password"
             placeholder="Enter your Password"
             name="password"
@@ -129,7 +129,7 @@ function ImgSteganography() {
           />
         </div>
         <input
-          className="block w-auto text-sm text-slate-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-1 file:border-dashed hover:file:border-dotted file:text-sm file:font-semibold file:bg-green-50 file:text-violet-700 hover:file:bg-green-100"
+          className="block w-auto text-sm text-white file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-1 file:border-dashed hover:file:border-dotted file:text-sm file:font-semibold file:bg-green-50 file:text-violet-700 hover:file:bg-green-100"
           name="image"
           type="file"
           onChange={handleFile2Change}
@@ -137,7 +137,7 @@ function ImgSteganography() {
         />
         <h6 className="text-xs mb-2">(The file must be an image)</h6>
         <button
-          className="bg-[#444] text-slate-900 cursor-pointer shadow-[0_2px_4px_rgba(0,0,0,0.4)] transition-all duration-[0.2s] ease-[ease-in-out] m-28 mt-3 px-5 py-2.5 rounded-[5px] border-[none] hover:bg-gray-900 hover:shadow-[0_4px_6px_rgba(0,0,0,0.4) mb-5"
+          className="bg-[#444] text-white cursor-pointer shadow-[0_2px_4px_rgba(0,0,0,0.4)] transition-all duration-[0.2s] ease-[ease-in-out] m-28 mt-3 px-5 py-2.5 rounded-[5px] border-[none] hover:bg-gray-900 hover:shadow-[0_4px_6px_rgba(0,0,0,0.4) mb-5"
           type="submit"
         >
           Submit

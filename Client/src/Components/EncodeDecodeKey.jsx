@@ -44,7 +44,7 @@ const EncodeDecodeKey = () => {
 
   return (
     <motion.div
-      className="flex flex-col mt-16 bg-inherit shadow-sm p-5 w-full h-full"
+      className="flex flex-col mt-16 bg-inherit p-5 w-full h-full"
       animate={{ transform: "rotateY(360deg)" }}
       transition={{ type: "spring", stiffness: 100, mass: 1, duration: 0.1 }}
       key={encodeDecode}
@@ -59,25 +59,25 @@ const EncodeDecodeKey = () => {
         />
       </div>
       {encodeDecode ? (
-        <h1 className="text-slate-800 mb-5 mt-3">Invisible Encoding</h1>
+        <h1 className="text-white mb-5 mt-3">Invisible Encoding</h1>
       ) : (
-        <h1 className="text-slate-800 mb-5 mt-3">Invisible Decoding</h1>
+        <h1 className="text-white mb-5 mt-3">Invisible Decoding</h1>
       )}
       <div>
         <div>
           {encodeDecode ? (
-            <label className="text-slate-900" htmlFor="input-secret">
+            <label className="text-white" htmlFor="input-secret">
               Input Secret Message
             </label>
           ) : (
-            <label className="text-slate-900" htmlFor="input-secret">
+            <label className="text-white" htmlFor="input-secret">
               Input your encoded Message
             </label>
           )}
         </div>
         <div>
           <input
-            className="text-slate-500 mt-3 mb-3"
+            className="text-white mt-3 mb-3"
             type="text"
             id="secret-message"
             accept="text"
@@ -88,7 +88,7 @@ const EncodeDecodeKey = () => {
       <div>
         {encodeDecode && (
           <div>
-            <label className="text-slate-900" htmlFor="salt">
+            <label className="text-white" htmlFor="salt">
               Enter any salt/story you want your secret in
             </label>
           </div>
@@ -96,7 +96,7 @@ const EncodeDecodeKey = () => {
         {encodeDecode && (
           <div>
             <input
-              className="text-slate-900 mt-3 mb-3"
+              className="text-white mt-3 mb-3"
               type="text"
               id="secret-message"
               accept="text"
