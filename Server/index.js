@@ -201,10 +201,13 @@ app.post("/decrypt/:algo", (req, res) => {
   }
 });
 
-const server = () => {
-  app.listen(port, () => {
-    console.log(`App listening at http://localhost:${port}`);
-  });
-};
+// const server = () => {
+// app.listen(port, () => {
+//   console.log(`App listening at http://localhost:${port}`);
+// });
+// };
+app.listen(port, () => {
+  console.log(`App listening at http://localhost:${port}`);
+});
 
-server();
+// server();
