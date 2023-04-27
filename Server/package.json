@@ -2,9 +2,9 @@
   "name": "encrypt_decrypt_project_server",
   "version": "1.0.0",
   "description": "",
-  "main": "app.js",
+  "main": "index.js",
   "scripts": {
-    "start": "node app.js",
+    "start": "node index.js",
     "dev": "nodemon index.js"
   },
   "dependencies": {
@@ -25,5 +25,7 @@
   },
   "devDependencies": {
     "nodemon": "^2.0.22"
-  }
+  },
+  "author": "",
+  "license": "ISC"
 }

@@ -6,7 +6,7 @@ const corsOptions = {
 };
 require("dotenv").config();
 
-const port = 3000;
+const port = process.env.PORT || 8081;
 
 const path = require("path");
 const fs = require("fs");
