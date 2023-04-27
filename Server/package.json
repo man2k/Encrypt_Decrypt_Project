@@ -1,4 +1,8 @@
 {
+  "name": "encrypt_decrypt_project",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
   "scripts": {
     "start": "node app.js",
     "dev": "nodemon app.js"
@@ -16,7 +20,8 @@
     "parse": "^4.0.1",
     "sharp": "^0.32.0",
     "stegcloak": "^1.1.1",
-    "steggy": "^2.0.1"
+    "steggy": "^2.0.1",
+    "uuid": "^9.0.0"
   },
   "devDependencies": {
     "nodemon": "^2.0.22"
