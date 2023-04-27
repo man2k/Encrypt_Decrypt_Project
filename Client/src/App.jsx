@@ -16,11 +16,12 @@ import Card from "./Components/Card";
 import SelectBox from "./Components/SelectBox";
 import ImgSteganography from "./Components/ImgSteganography";
 
-const baseUrl = "http://localhost:3000";
+const baseUrl = "http://localhost:8080";
 
 function App() {
   //States
   const [file, setFile] = useState();
+  const [fileDec, setFileDec] = useState();
   const [UserChoice, setChoice] = useState("");
   const [UserDecChoice, setDecChoice] = useState("");
   const [key, setKey] = useState("");
@@ -32,21 +33,28 @@ function App() {
   const handleFile = (e) => {
     setFile(e.target.files[0]);
   };
+  const handleFileDec = (e) => {
+    setFileDec(e.target.files[0]);
+    // console.log(fileDec);
+  };
 
-  const handleForm = async (e) => {
+  const handleForm = async (e, opname) => {
     e.preventDefault();
+    // console.log(opname);
     const formData = new FormData();
     try {
-      formData.append("file", file);
-      formData.append("fileName", file.name);
+      formData.append("file", opname === "enc" ? file : fileDec);
+      formData.append("fileName", opname === "enc" ? file.name : fileDec.name);
       const config = {
         headers: {
           "Content-Type": "multipart/form-data; boundary=MyBoundary",
         },
       };
-      await axios.post(`${baseUrl}/upload`, formData, config).then((res) => {
-        setUploaded(true);
-      });
+      await axios
+        .post(`${baseUrl}/upload/${opname}`, formData, config)
+        .then((res) => {
+          setUploaded(true);
+        });
     } catch (error) {
       console.log(error);
     }
@@ -69,7 +77,7 @@ function App() {
   };
 
   const handleDecrypt = async () => {
-    const url = `${baseUrl}/decrypt/${UserChoice}`;
+    const url = `${baseUrl}/decrypt/${UserDecChoice}`;
 
     const json = JSON.stringify({ key: keyDec });
     let fileName;
@@ -104,7 +112,11 @@ function App() {
         <div>
           <h1 className="w-full mb-5">Encryption</h1>
           <div className="flex flex-col w-full space-y-5">
-            <FormBox handleForm={handleForm} handleFile={handleFile} />
+            <FormBox
+              name="enc"
+              handleForm={handleForm}
+              handleFile={handleFile}
+            />
             <SelectBox setChoice={setChoice} type="Encryption" />
             <div>
               <ButtonEnc
@@ -121,12 +133,20 @@ function App() {
         <div>
           <h1 className="w-full mb-5">Decryption</h1>
           <div className="flex flex-col w-full space-y-5">
-            <FormBox handleForm={handleForm} handleFile={handleFile} />
+            <FormBox
+              name="dec"
+              handleForm={handleForm}
+              handleFile={handleFileDec}
+            />
             <SelectBox setChoice={setDecChoice} type="Decryption" />
             {UserDecChoice && <InputKeyBox setKeyDec={setKeyDec} />}
             <div>
               {keyDec && (
-                <ButtonDec handleDecrypt={handleDecrypt} keyDec={keyDec} />
+                <ButtonDec
+                  handleDecrypt={handleDecrypt}
+                  keyDec={keyDec}
+                  UserChoice={UserDecChoice}
+                />
               )}
             </div>
           </div>
