@@ -6,7 +6,7 @@ const corsOptions = {
 };
 require("dotenv").config();
 
-const port = process.env.PORT || 8080;
+const port = process.env.PORT || 8081;
 
 const path = require("path");
 const fs = require("fs");
@@ -19,7 +19,7 @@ app.use(cors(corsOptions));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-// app.use(express.static("./public"));
+app.use(express.static("./public"));
 
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
@@ -29,6 +29,17 @@ const storage = multer.diskStorage({
     // console.log(file);
     const filename = `forenc.${file.mimetype.split("/")[1]}`;
     cb(null, filename);
+  },
+});
+
+const storagedec = multer.diskStorage({
+  destination: (req, file, cb) => {
+    cb(null, "./uploads/store");
+  },
+  filename: (req, file, cb) => {
+    // console.log(file);
+    // const filename = `forenc.${file.mimetype.split("/")[1]}`;
+    cb(null, file.originalname);
   },
 });
 
@@ -51,15 +62,28 @@ const storage3 = multer.diskStorage({
 });
 
 const upload = multer({ storage: storage });
+const uploadEnc = multer({ storage: storagedec });
 const upload2 = multer({ storage: storage2 });
 const upload3 = multer({ storage: storage3 });
 let originalFileName;
 let originalFilePath;
 
-app.post("/upload", upload.single("file"), (req, res) => {
+app.post("/upload/enc", upload.single("file"), (req, res) => {
   const file = req.file;
   originalFilePath = req.file.path;
   originalFileName = req.file.originalname;
+  // console.log(originalFileName);
+  if (!file) {
+    return res.status(400).json({ error: "File Upload Failed" });
+  }
+  console.log("File Uploaded Successfully");
+  res.status(200).json({ success: true });
+});
+app.post("/upload/dec", uploadEnc.single("file"), (req, res) => {
+  const file = req.file;
+  originalFilePath = req.file.path;
+  originalFileName = req.file.originalname;
+  // console.log(originalFileName);
   if (!file) {
     return res.status(400).json({ error: "File Upload Failed" });
   }
@@ -146,6 +170,7 @@ app.post("/decrypt/:algo", (req, res) => {
       (err) => {
         if (err) {
           console.error("err", err);
+          res.json({ success: false, error: err });
         } else {
           console.log("File Decrypted Successfully");
 
@@ -174,6 +199,10 @@ app.post("/decrypt/:algo", (req, res) => {
   }
 });
 
-app.listen(port, () => {
-  console.log(`App listening at http://localhost:${port}`);
-});
+const server = () => {
+  app.listen(port, () => {
+    console.log(`App listening at http://localhost:${port}`);
+  });
+};
+
+server();
