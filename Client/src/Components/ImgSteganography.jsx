@@ -3,7 +3,7 @@ import axios from "axios";
 import FileDownload from "js-file-download";
 import { motion } from "framer-motion";
 
-const baseUrl = "https://cyclic-test-m5ri1i87u-man2k.vercel.app";
+const baseUrl = "https://enc-dec-uem-prod.vercel.app";
 
 function ImgSteganography() {
   const [input, setInput] = useState("");

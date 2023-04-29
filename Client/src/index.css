@@ -11,12 +11,19 @@
   -moz-osx-font-smoothing: grayscale;
   -webkit-text-size-adjust: 100%;
 }
+@media (max-width: 640px) {
+  :root {
+    font-size: 14px;
+  }
+}
 a {
   @apply font-medium text-[#646cff] hover:text-[#535bf2];
   text-decoration: inherit;
 }
 body {
   @apply bg-[#242323] text-[white];
+  background-size: cover;
+  background-position: center center;
 }
 h1 {
   @apply text-[3.2em] leading-[1.1];
