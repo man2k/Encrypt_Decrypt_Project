@@ -16,7 +16,7 @@ import Card from "./Components/Card";
 import SelectBox from "./Components/SelectBox";
 import ImgSteganography from "./Components/ImgSteganography";
 
-const baseUrl = "http://localhost:8080";
+const baseUrl = "https://cyclic-test-m5ri1i87u-man2k.vercel.app";
 
 function App() {
   //States

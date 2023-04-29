@@ -8,7 +8,7 @@ const FormBox = (props) => {
       <form id="UploadForm" onSubmit={(e) => props.handleForm(e, props.name)}>
         <input
           key={props.name}
-          className="block w-full text-sm text-white file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-1 file:border-dashed hover:file:border-dotted file:text-sm file:font-semibold file:bg-green-50 file:text-violet-700 hover:file:bg-green-100"
+          className="block w-full text-sm file:text-black text-white file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-2 file:border-black file:border-dashed hover:file:border-dotted file:text-sm file:font-semibold file:bg-green-50 file:text-violet-700 hover:file:bg-green-100"
           type="file"
           name="file"
           onChange={props.handleFile}

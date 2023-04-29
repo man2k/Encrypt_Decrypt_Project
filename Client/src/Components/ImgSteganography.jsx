@@ -3,7 +3,7 @@ import axios from "axios";
 import FileDownload from "js-file-download";
 import { motion } from "framer-motion";
 
-const baseUrl = "http://localhost:3000";
+const baseUrl = "https://cyclic-test-m5ri1i87u-man2k.vercel.app";
 
 function ImgSteganography() {
   const [input, setInput] = useState("");
@@ -110,7 +110,7 @@ function ImgSteganography() {
         {stegUnsteg && (
           <div>
             <input
-              className="block w-72 text-sm text-white file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-1 file:border-dashed hover:file:border-dotted file:text-sm file:font-semibold file:bg-green-50 file:text-violet-700 hover:file:bg-green-100"
+              className="block w-72 text-sm text-white"
               type="text"
               placeholder="Enter your secret message"
               name="file"
@@ -121,7 +121,7 @@ function ImgSteganography() {
         <br />
         <div className="mb-5">
           <input
-            className="block w-72 text-sm text-white file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-1 file:border-dashed hover:file:border-dotted file:text-sm file:font-semibold file:bg-green-50 file:text-violet-700 hover:file:bg-green-100"
+            className="block w-72 text-sm text-white"
             type="password"
             placeholder="Enter your Password"
             name="password"
@@ -129,7 +129,7 @@ function ImgSteganography() {
           />
         </div>
         <input
-          className="block w-auto text-sm text-white file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-1 file:border-dashed hover:file:border-dotted file:text-sm file:font-semibold file:bg-green-50 file:text-violet-700 hover:file:bg-green-100"
+          className="block w-auto text-sm text-white file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-2 file:border-dashed hover:file:border-dotted file:text-sm file:font-semibold file:bg-green-50 file:text-black file:border-black hover:file:bg-green-100"
           name="image"
           type="file"
           onChange={handleFile2Change}
