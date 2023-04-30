@@ -27,8 +27,10 @@ function App() {
   const [key, setKey] = useState("");
   const [keyDec, setKeyDec] = useState("");
   const [uploaded, setUploaded] = useState(false);
+  const [uploadeddec, setUploadedDec] = useState(false);
   const [encrypted, setEncrypted] = useState(false);
-
+  const [decrypted, setDecrypted] = useState(false);
+  const [validPass, setValidPass] = useState(true);
   //Functions
   const handleFile = (e) => {
     setFile(e.target.files[0]);
@@ -53,7 +55,8 @@ function App() {
       await axios
         .post(`${baseUrl}/upload/${opname}`, formData, config)
         .then((res) => {
-          setUploaded(true);
+          opname === "enc" ? setUploaded(true) : setUploadedDec(true);
+          opname === "enc" ? setEncrypted(false) : setDecrypted(false);
         });
     } catch (error) {
       console.log(error);
@@ -70,6 +73,7 @@ function App() {
         );
         setKey(res.headers["x-key"]);
         setEncrypted(true);
+        setUploaded(false);
       });
     } catch (error) {
       console.log(error);
@@ -89,6 +93,11 @@ function App() {
       },
     })
       .then((res) => {
+        // console.log(res);
+        if (res.status === 400) {
+          setValidPass(false);
+          return;
+        }
         fileName = res.headers.get("filename");
         if (!fileName) {
           return;
@@ -99,6 +108,8 @@ function App() {
         if (fileName) {
           FileDownload(blob, fileName);
         }
+        setDecrypted(true);
+        setUploadedDec(false);
       })
       .catch((error) => {
         console.error(error);
@@ -110,19 +121,27 @@ function App() {
     <div className="App flex flex-auto flex-col justify-between">
       <div className="flex flex-row justify-around mb-5">
         <div>
-          <h1 className="w-full mb-5">Encryption</h1>
+          <h1 className="w-full mb-5 font-mono font-bold">Encryption</h1>
           <div className="flex flex-col w-full space-y-5">
             <FormBox
               name="enc"
               handleForm={handleForm}
               handleFile={handleFile}
+              uploaded={uploaded}
             />
-            <SelectBox setChoice={setChoice} type="Encryption" />
+            <SelectBox
+              UserChoice={UserChoice}
+              setChoice={setChoice}
+              type="Encryption"
+            />
             <div>
               <ButtonEnc
                 handleEncrypt={handleEncrypt}
                 setKey={setKey}
+                uploaded={uploaded}
+                encrypted={encrypted}
                 UserChoice={UserChoice}
+                setUploaded={setUploaded}
               />
             </div>
             <div className="flex w-full">
@@ -131,21 +150,29 @@ function App() {
           </div>
         </div>
         <div>
-          <h1 className="w-full mb-5">Decryption</h1>
+          <h1 className="w-full mb-5 font-mono font-bold">Decryption</h1>
           <div className="flex flex-col w-full space-y-5">
             <FormBox
               name="dec"
               handleForm={handleForm}
               handleFile={handleFileDec}
+              uploaded={uploadeddec}
             />
-            <SelectBox setChoice={setDecChoice} type="Decryption" />
+            <SelectBox
+              UserChoice={UserDecChoice}
+              setChoice={setDecChoice}
+              type="Decryption"
+            />
             {UserDecChoice && <InputKeyBox setKeyDec={setKeyDec} />}
             <div>
               {keyDec && (
                 <ButtonDec
+                  decrypted={decrypted}
                   handleDecrypt={handleDecrypt}
                   keyDec={keyDec}
                   UserChoice={UserDecChoice}
+                  setUploaded={setUploadedDec}
+                  validPass={validPass}
                 />
               )}
             </div>

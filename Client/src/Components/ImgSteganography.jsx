@@ -99,9 +99,9 @@ function ImgSteganography() {
         />
       </div>
       {stegUnsteg ? (
-        <h1 className="text-white mb-5">Steganography</h1>
+        <h1 className="text-blue-400 mb-5 font-mono">Steganography</h1>
       ) : (
-        <h1 className="text-white mb-5">Desteganography</h1>
+        <h1 className="text-blue-500 mb-5 font-mono">Desteganography</h1>
       )}
       <form
         className="flex w-2/3 flex-col items-center justify-between"
@@ -110,7 +110,7 @@ function ImgSteganography() {
         {stegUnsteg && (
           <div>
             <input
-              className="block w-72 text-sm text-white"
+              className="block w-72 text-sm text-sky-200 font-mono"
               type="text"
               placeholder="Enter your secret message"
               name="file"
@@ -121,7 +121,7 @@ function ImgSteganography() {
         <br />
         <div className="mb-5">
           <input
-            className="block w-72 text-sm text-white"
+            className="block w-72 text-sm text-sky-200 font-mono"
             type="password"
             placeholder="Enter your Password"
             name="password"
@@ -129,7 +129,7 @@ function ImgSteganography() {
           />
         </div>
         <input
-          className="block w-auto text-sm text-white file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-2 file:border-dashed hover:file:border-dotted file:text-sm file:font-semibold file:bg-green-50 file:text-black file:border-black hover:file:bg-green-100"
+          className="block w-auto font-mono text-sm text-sky-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-2 file:border-dashed hover:file:border-dotted file:text-sm file:font-semibold file:bg-green-50 file:text-black file:border-black hover:file:bg-green-100"
           name="image"
           type="file"
           onChange={handleFile2Change}
@@ -137,7 +137,7 @@ function ImgSteganography() {
         />
         <h6 className="text-xs mb-2">(The file must be an image)</h6>
         <button
-          className="bg-[#444] text-white cursor-pointer shadow-[0_2px_4px_rgba(0,0,0,0.4)] transition-all duration-[0.2s] ease-[ease-in-out] m-28 mt-3 px-5 py-2.5 rounded-[5px] border-[none] hover:bg-gray-900 hover:shadow-[0_4px_6px_rgba(0,0,0,0.4) mb-5"
+          className="bg-[#444] font-mono text-white cursor-pointer shadow-[0_2px_4px_rgba(0,0,0,0.4)] transition-all duration-[0.2s] ease-[ease-in-out] m-28 mt-3 px-5 py-2.5 rounded-[5px] border-[none] hover:bg-gray-900 hover:shadow-[0_4px_6px_rgba(0,0,0,0.4) mb-5"
           type="submit"
         >
           Submit

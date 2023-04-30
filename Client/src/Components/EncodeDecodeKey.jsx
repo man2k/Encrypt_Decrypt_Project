@@ -44,7 +44,7 @@ const EncodeDecodeKey = () => {
 
   return (
     <motion.div
-      className="flex flex-col mt-16 bg-inherit p-5 w-full h-full"
+      className="flex flex-col mt-16 bg-inherit p-5 w-full h-full ml-6"
       animate={{ transform: "rotateY(360deg)" }}
       transition={{ type: "spring", stiffness: 100, mass: 1, duration: 0.1 }}
       key={encodeDecode}
@@ -59,27 +59,33 @@ const EncodeDecodeKey = () => {
         />
       </div>
       {encodeDecode ? (
-        <h1 className="text-white mb-5 mt-3">Invisible Encoding</h1>
+        <h1 className="text-red-400 mb-5 mt-3 font-mono">Invisible Encoding</h1>
       ) : (
-        <h1 className="text-white mb-5 mt-3">Invisible Decoding</h1>
+        <h1 className="text-red-500 mb-5 mt-3">Invisible Decoding</h1>
       )}
       <div>
         <div>
           {encodeDecode ? (
-            <label className="text-white" htmlFor="input-secret">
+            <label
+              className="text-red-200 font-mono font-bold"
+              htmlFor="input-secret"
+            >
               Input Secret Message
             </label>
           ) : (
-            <label className="text-white" htmlFor="input-secret">
+            <label
+              className="text-red-300 font-mono font-bold"
+              htmlFor="encoded-input"
+            >
               Input your encoded Message
             </label>
           )}
         </div>
         <div>
           <input
-            className="text-white mt-3 mb-3"
+            className="text-sky-300 mt-3 mb-3 font-mono"
             type="text"
-            id="secret-message"
+            id="salt"
             accept="text"
             onChange={handleInput}
           />
@@ -88,7 +94,7 @@ const EncodeDecodeKey = () => {
       <div>
         {encodeDecode && (
           <div>
-            <label className="text-white" htmlFor="salt">
+            <label className="text-red-200 font-mono" htmlFor="salt">
               Enter any salt/story you want your secret in
             </label>
           </div>
@@ -96,7 +102,7 @@ const EncodeDecodeKey = () => {
         {encodeDecode && (
           <div>
             <input
-              className="text-white mt-3 mb-3"
+              className="text-sky-300 mt-3 mb-3 font-mono"
               type="text"
               id="secret-message"
               accept="text"
@@ -107,7 +113,7 @@ const EncodeDecodeKey = () => {
         {encodeDecode ? (
           <div>
             <button
-              className="button hover:bg-slate-900 hover:font-bold"
+              className="button hover:bg-slate-900 hover:font-bold font-mono"
               onClick={(e) => {
                 if (encodeDecode) {
                   handleEncode(e);
