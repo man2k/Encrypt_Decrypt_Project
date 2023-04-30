@@ -55,7 +55,7 @@ function App() {
       await axios
         .post(`${baseUrl}/upload/${opname}`, formData, config)
         .then((res) => {
-          setUploaded(false);
+          // setUploaded(false);
           opname === "enc" ? setUploaded(true) : setUploadedDec(true);
           opname === "enc" ? setEncrypted(false) : setDecrypted(false);
         });
@@ -95,9 +95,13 @@ function App() {
     })
       .then((res) => {
         // console.log(res);
-        if (res.status === 400) {
+        if (res.status === 401) {
           setValidPass(false);
           return;
+        } else if (res.status === 404) {
+          return;
+        } else if (res.status === 200) {
+          setValidPass(true);
         }
         fileName = res.headers.get("filename");
         if (!fileName) {
@@ -172,7 +176,7 @@ function App() {
                   handleDecrypt={handleDecrypt}
                   keyDec={keyDec}
                   UserChoice={UserDecChoice}
-                  setUploaded={setUploadedDec}
+                  uploaded={uploadeddec}
                   validPass={validPass}
                 />
               )}
