@@ -9,7 +9,7 @@ const ButtonEnc = (props) => {
         type="encrypt"
         onClick={() => {
           props.handleEncrypt(props.setKey, props.UserChoice);
-          props.setUploaded(false);
+          // props.setUploaded(false);
         }}
       >
         {props.encrypted

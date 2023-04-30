@@ -55,6 +55,7 @@ function App() {
       await axios
         .post(`${baseUrl}/upload/${opname}`, formData, config)
         .then((res) => {
+          setUploaded(false);
           opname === "enc" ? setUploaded(true) : setUploadedDec(true);
           opname === "enc" ? setEncrypted(false) : setDecrypted(false);
         });
